@@ -19,8 +19,9 @@ class Library:
     def add_book(self, book):
         for existing_book in self.books:
             if existing_book.title == book.title:
-                return
+                return False
         self.books.append(book)
+        return True
 
     def delete_book(self, index):
         del self.books[index]
@@ -42,6 +43,6 @@ class Library:
 
     def search_book(self,keyword):
         results = []
-        for book in results:
+        for book in self.books:
             if keyword.lower() in book.title.lower():
                 results.append(book)

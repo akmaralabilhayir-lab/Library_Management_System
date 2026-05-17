@@ -5,21 +5,37 @@ from book import Book
 
 library = Library()
 def add_book():
-    title = title_entry.get()
-    author = author_entry.get()
-    year = year_entry.get()
+    try:
+        title = title_entry.get().strip()
+        author = author_entry.get().strip()
+        year = year_entry.get().strip()
 
-    if not title or not author or not year:
-        messagebox.showerror("Error", "Please, enter all fields")
-        return
+        if not title or not author or not year:
+            messagebox.showerror("Error", "Please, enter all fields")
+            return
 
-    book = Book(title, author, year)
-    library.add_book(book)
-    library.save_data()
+        if not year.isdigit() or len(year) != 4:
+            messagebox.showerror("Error", "Year must be 4digit number")
+            return
 
-    messagebox.showinfo("Success", "Book added successfully")
-    clear_entries()
-    show_books()
+        if len(title) > 150:
+            messagebox.showerror("Error", "Title too long (max 150 characters)")
+            return
+
+        if len(author) > 100:
+            messagebox.showerror("Error", "Author name too long (max 100 characters)")
+            return
+
+        book = Book(title, author, year)
+        if library.add_book(book):
+            library.save_data()
+            messagebox.showinfo("Success", "Book added successfully")
+            clear_entries()
+            show_books()
+        else:
+            messagebox.showerror("Error", "Book with this title already exists")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to add book: {str(e)}")
 
 def show_books():
     listbox.delete(0, tk.END)
@@ -34,7 +50,7 @@ def delete_book():
         messagebox.showerror("Error", "Select book")
         return
 
-    confirm = messagebox.askyyesno(
+    confirm = messagebox.askyesno(
         "Confirm Delete", "Are you sure you want to delete this book?"
     )
     if not confirm:
