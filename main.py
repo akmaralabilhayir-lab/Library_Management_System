@@ -26,6 +26,7 @@ def show_books():
     for book in library.books:
         text = f"{book.title} | {book.author} | {book.year} | {book.status}"
         listbox.insert(tk.END, text)
+    count_label.config(text=f"Total books: {len(library.books)}")
 
 def delete_book():
     selected = listbox.curselection()
@@ -98,6 +99,9 @@ author_entry.pack()
 tk.Label(root, text="Year").pack()
 year_entry = tk.Entry(root, width=40)
 year_entry.pack()
+
+count_label = tk.Label(root, text="Total books: 0", bg="#DCEEFF")
+count_label.pack()
 
 tk.Button(root, text="Search Book",
           command=search_book,
