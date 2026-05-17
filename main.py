@@ -126,6 +126,11 @@ tk.Button(root, text="Return Book",
 
 listbox = tk.Listbox(root, width=80, height=15)
 listbox.pack(pady=10)
+scrollbar = tk.Scrollbar(root)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+listbox.config(yscrollcommand=scrollbar.set)
+scrollbar.config(command=listbox.yview)
 
 show_books()
 root.mainloop()
