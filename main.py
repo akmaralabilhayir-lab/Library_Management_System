@@ -33,6 +33,12 @@ def delete_book():
         messagebox.showerror("Error", "Select book")
         return
 
+    confirm = messagebox.askyyesno(
+        "Confirm Delete", "Are you sure you want to delete this book?"
+    )
+    if not confirm:
+        return
+
     index = selected[0]
     library.delete_book(index)
     library.save_data()
