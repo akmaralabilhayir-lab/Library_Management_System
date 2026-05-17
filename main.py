@@ -63,11 +63,18 @@ def return_book():
 
     show_books()
 
-
 def clear_entries():
     title_entry.delete(0, tk.END)
     author_entry.delete(0, tk.END)
     year_entry.delete(0, tk.END)
+
+def search_book():
+    keyword = title_entry.get()
+    listbox.delete(0, tk.END)
+    results = library.search_book(keyword)
+    for book in results:
+        text = f"{book.title} | {book.author} | {book.year} | {book.status}"
+        listbox.insert(tk.END, text)
 
 root = tk.Tk()
 root.title("Library Management System")
@@ -85,6 +92,11 @@ author_entry.pack()
 tk.Label(root, text="Year").pack()
 year_entry = tk.Entry(root, width=40)
 year_entry.pack()
+
+tk.Button(root, text="Search Book",
+          command=search_book,
+          bg="#9C27B0",
+          fg="white",).pack(pady=5)
 
 tk.Button(root, text="Add Book",
           command=add_book,

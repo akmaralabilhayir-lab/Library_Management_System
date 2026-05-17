@@ -36,3 +36,9 @@ class Library:
 
     def save_data(self):
         save_books(self.books)
+
+    def search_book(self):
+        results = []
+        for book in results:
+            if keyword.lower() in book.title.lower():
+                results.append(book)
