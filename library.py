@@ -17,6 +17,9 @@ class Library:
 
     @log_action
     def add_book(self, book):
+        for existing_book in self.books:
+            if existing_book.title == book.title:
+                return
         self.books.append(book)
 
     def delete_book(self, index):
@@ -37,7 +40,7 @@ class Library:
     def save_data(self):
         save_books(self.books)
 
-    def search_book(self):
+    def search_book(self,keyword):
         results = []
         for book in results:
             if keyword.lower() in book.title.lower():
