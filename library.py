@@ -46,3 +46,4 @@ class Library:
         for book in self.books:
             if keyword.lower() in book.title.lower():
                 results.append(book)
+        return results

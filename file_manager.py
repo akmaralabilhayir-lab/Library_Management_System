@@ -1,7 +1,7 @@
 import json
 from book import Book
 
-FILE_NAME = "book.json"
+FILE_NAME = "data/book.json"
 
 def load_books():
     try:
@@ -36,3 +36,11 @@ def load_books():
     except Exception as e:
         print(f"Error loading books: {e}")
         return []
+
+def save_books(books):
+    data = []
+    for book in books:
+        data.append(book.to_dict())
+
+    with open(FILE_NAME, "w") as file:
+        json.dump(data, file, indent=4)
