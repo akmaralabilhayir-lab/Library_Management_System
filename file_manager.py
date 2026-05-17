@@ -17,7 +17,7 @@ def load_books():
                 )
 
                 books.append(book)
-                return books
+            return books
     except FileNotFoundError:
         return []
 

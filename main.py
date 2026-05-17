@@ -85,56 +85,78 @@ def search_book():
 
 root = tk.Tk()
 root.title("Library Management System")
-root.geometry("600x500")
-root.configure(bg="#DCEEFF")
+root.geometry("900x650")
+root.configure(bg="#F4F7FF")
 
-tk.Label(root, text="Title").pack()
-title_entry = tk.Entry(root, width=40)
-title_entry.pack()
+title_label = tk.Label(root, text="Library Management System",
+    font=("Helvetica", 24, "bold"),
+    bg="#F4F7FF", fg="#1A237E"
+)
+title_label.pack(pady=20)
 
-tk.Label(root, text="Author").pack()
-author_entry = tk.Entry(root, width=40)
-author_entry.pack()
+input_frame = tk.Frame(root, bg="white", bd=2, relief="groove")
+input_frame.pack(pady=10, padx=20, fill="x")
+input_frame.columnconfigure(0, weight=1)
+input_frame.columnconfigure(1, weight=3)
 
-tk.Label(root, text="Year").pack()
-year_entry = tk.Entry(root, width=40)
-year_entry.pack()
+tk.Label(input_frame, text="Title", font=("Arial", 11, "bold"),
+         bg="white").grid(row=0, column=0, padx=10, pady=10, sticky="w")
+title_entry = tk.Entry(input_frame, width=40, font=("Arial", 12), bd=3)
+title_entry.grid(row=0, column=1, padx=10)
 
-count_label = tk.Label(root, text="Total books: 0", bg="#DCEEFF")
+tk.Label(input_frame, text="Author", font=("Arial", 11, "bold"),
+         bg="white").grid(row=1, column=0, padx=10, pady=10, sticky="w")
+author_entry = tk.Entry(input_frame, width=40, font=("Arial", 12), bd=3)
+author_entry.grid(row=1, column=1)
+
+tk.Label(input_frame, text="Year", font=("Arial", 11, "bold"),
+         bg="white").grid(row=2, column=0, padx=10, pady=10, sticky="w")
+year_entry = tk.Entry(input_frame, width=40, font=("Arial", 12), bd=3)
+year_entry.grid(row=2, column=1)
+
+count_label = tk.Label(root,text="Total books: 0",
+    font=("Arial", 12, "bold"), bg="#F4F7FF", fg="#333"
+)
 count_label.pack()
 
-tk.Button(root, text="Search Book",
-          command=search_book,
-          bg="#9C27B0",
-          fg="white",).pack(pady=5)
 
-tk.Button(root, text="Add Book",
-          command=add_book,
-          bg="#4CAF50",
-          fg="white").pack(pady=5)
+button_frame = tk.Frame(root, bg="#F4F7FF")
+button_frame.pack(pady=20)
+btn_style = {"font": ("Arial", 10, "bold"),
+    "width": 14, "height": 2,
+    "bd": 0, "cursor": "hand2"
+}
 
-tk.Button(root, text="Delete Book",
-          command=delete_book,
-          bg="#F44336",
-          fg="white").pack(pady=5)
+tk.Button(button_frame, text="Search Book", command=search_book,
+           bg="#9C27B0",fg="white", **btn_style).grid(row=0, column=0, padx=8)
 
-tk.Button(root, text="Borrow Book",
-          command=borrow_book,
-          bg="#2196F3",
-          fg="white").pack(pady=5)
+tk.Button(button_frame, text="Add Book", command=add_book,
+          bg="#4CAF50", fg="white", **btn_style).grid(row=0, column=1, padx=8)
 
-tk.Button(root, text="Return Book",
-          command=return_book,
-          bg="#FF9800",
-          fg="white").pack(pady=5)
+tk.Button(button_frame, text="Delete Book", command=delete_book,
+          bg="#F44336", fg="white", **btn_style).grid(row=0, column=2, padx=8)
 
-listbox = tk.Listbox(root, width=80, height=15)
-listbox.pack(pady=10)
-scrollbar = tk.Scrollbar(root)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+tk.Button(button_frame, text="Borrow Book", command=borrow_book,
+          bg="#2196F3", fg="white", **btn_style).grid(row=0, column=3, padx=8)
 
-listbox.config(yscrollcommand=scrollbar.set)
+tk.Button(button_frame, text="Return Book", command=return_book,
+          bg="#FF9800", fg="white", **btn_style).grid(row=0, column=4, padx=8)
+
+
+list_frame = tk.Frame(root)
+list_frame.pack(pady=15)
+
+scrollbar = tk.Scrollbar(list_frame)
+listbox = tk.Listbox(list_frame,width=90, height=15,
+    font=("Consolas", 11), bd=2, relief="solid",
+    yscrollcommand=scrollbar.set,
+    selectbackground="#4CAF50",
+    selectforeground="white"
+)
+
 scrollbar.config(command=listbox.yview)
+listbox.pack(side=tk.LEFT)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
 show_books()
 root.mainloop()
