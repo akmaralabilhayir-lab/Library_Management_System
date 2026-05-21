@@ -166,7 +166,7 @@ The application stores all book data in a JSON file.
 
 File used:
 
-```text
+```
 books.json
 ```
 
@@ -214,7 +214,7 @@ Deletes the selected book after confirmation.
 
 Changes book status:
 
-```text
+```
 Available → Borrowed
 ```
 
@@ -224,7 +224,7 @@ Available → Borrowed
 
 Changes status:
 
-```text
+```
 Borrowed → Available
 ```
 
@@ -238,7 +238,7 @@ The system prevents duplicate books from being added.
 
 # Architecture Overview
 
-```text
+```
 GUI (Tkinter)
        ↓
 Library Logic
@@ -259,20 +259,15 @@ Tested functions:
 - `borrow_book()`
 - `return_book()`
 
-Run tests:
 
-```bash
-python -m unittest discover tests
-```
 
-Example output:
+Screen output:
 
-```text
-test_add_book ... ok
-test_delete_book ... ok
-test_borrow_book ... ok
-test_return_book ... ok
-```
+
+
+<img width="425" height="353" alt="image" src="https://github.com/user-attachments/assets/a0cec33a-5f13-4b38-a684-74cc917bb01a" />
+
+
 
 
 
